@@ -108,8 +108,8 @@
             white-space: nowrap; /* Prevent sub-title from wrapping */
         }
 
-        /* Styles for the toggle icon in collapsible card header */
-        .collapsible-card-header .toggle-icon {
+        /* Styles for the toggle icon in details summary */
+        details summary .toggle-icon {
             transition: transform 0.3s ease;
             position: absolute;
             right: 20px;
@@ -117,22 +117,14 @@
             transform: translateY(-50%) rotate(-90deg); /* Initial position: centered and pointing down */
         }
 
-        .collapsible-card.open .toggle-icon {
+        details[open] summary .toggle-icon {
             transform: translateY(-50%) rotate(0deg); /* Arrow points up when open, still centered */
         }
-
+        
         .card-content {
             padding: 20px;
         }
         
-        .collapsible-card-content {
-            display: none;
-        }
-
-        .collapsible-card.open .collapsible-card-content {
-            display: block;
-        }
-
         .timeline-item {
             position: relative;
             padding-left: 28px;
@@ -350,14 +342,11 @@
 <body class="text-stone-800 safari-padding">
 
     <div id="main-content" class="pb-24">
-        <!-- Home Page -->
         <section id="home" class="page-content">
             <div class="header flex flex-col items-center justify-center">
                 <div class="flex items-center justify-center">
-                    <span class="text-3xl mr-2 opacity-70">🐘</span>
-                    <h1 class="font-bold drop-shadow-sm handwritten sm:text-3xl md:text-5xl">CHIANG MAI</h1>
-                    <span class="text-2xl ml-2 opacity-60">🌸</span>
-                </div>
+                    <span class="text-3xl mr-2 opacity-70">🐘</span> <h1 class="font-bold drop-shadow-sm handwritten sm:text-3xl md:text-5xl">CHIANG MAI</h1>
+                    <span class="text-2xl ml-2 opacity-60">🌸</span> </div>
                 <p class="mt-2 text-lg">2025/09/20 - 2025/09/24</p>
             </div>
 
@@ -445,7 +434,6 @@
                     </button>
                 </div>
 
-                <!-- 新增預算概估卡片 -->
                 <div class="card mt-4">
                     <div class="card-header">
                         <i class="fas fa-wallet"></i><span class="main-title">預算概估 (每人)</span>
@@ -499,7 +487,6 @@
                     </div>
                 </div>
 
-                <!-- 新增貼心小提醒卡片 -->
                 <div class="card mt-4">
                     <div class="card-header">
                         <i class="fas fa-lightbulb"></i><span class="main-title">貼心小提醒</span>
@@ -827,7 +814,7 @@
                         <div class="space-y-4">
                             <div class="timeline-item">
                                 <p class="font-semibold">08:30 早餐 @ 飯店 (享受最後的清邁早晨 ☕)</p>
-                                <p class="text-xs text-stone-500 mt-1">停留: 30 分en</p>
+                                <p class="text-xs text-stone-500 mt-1">停留: 30 分鐘</p>
                             </div>
                             
                             <div class="timeline-item">
@@ -972,12 +959,12 @@
         <div id="trip-notes" class="page-content hidden p-4">
             <h1 class="text-2xl font-bold text-center text-amber-800 my-4 trip-notes-heading"><span class="emoji">📝฿</span> 旅途筆記</h1>
             
-            <div class="collapsible-card card open">
-                <div class="collapsible-card-header card-header cursor-pointer">
+            <details class="card" open>
+                <summary class="card-header cursor-pointer">
                     🛍️ 必買伴手禮清單
                     <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <div class="collapsible-card-content card-content">
+                </summary>
+                <div class="card-content">
                     <h3 class="font-semibold text-amber-700 mb-3">1. 美妝保養類</h3>
                     <ul class="list-disc text-stone-700 pl-5 space-y-3">
                         <li>
@@ -1054,26 +1041,26 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </details>
 
-            <div class="collapsible-card card">
-                <div class="collapsible-card-header card-header cursor-pointer">
+            <details class="card">
+                <summary class="card-header cursor-pointer">
                     🎒 旅程必備物品清單
                     <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <div class="collapsible-card-content card-content" id="must-bring-items-list">
+                </summary>
+                <div class="card-content" id="must-bring-items-list">
                     <div id="loading-message" class="text-center text-stone-500">
                         <i class="fas fa-spinner animate-spin mr-2"></i>載入中...
                     </div>
                 </div>
-            </div>
+            </details>
             
-            <div class="collapsible-card card">
-                <div class="collapsible-card-header card-header cursor-pointer">
+            <details class="card">
+                <summary class="card-header cursor-pointer">
                     🚨 危機處理
                     <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <div class="collapsible-card-content card-content">
+                </summary>
+                <div class="card-content">
                     <h3 class="font-semibold text-amber-700 mb-3">1. 護照遺失</h3>
                     <ul class="list-disc text-stone-700 pl-5 space-y-2">
                         <li>立即向當地警察局報案取得報案證明。</li>
@@ -1118,14 +1105,14 @@
                         <li>消防隊：199</li>
                     </ul>
                 </div>
-            </div>
+            </details>
             
-            <div class="collapsible-card card">
-                <div class="collapsible-card-header card-header cursor-pointer">
+            <details class="card">
+                <summary class="card-header cursor-pointer">
                     💰 退稅注意事項
                     <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <div class="collapsible-card-content card-content">
+                </summary>
+                <div class="card-content">
                     <h3 class="font-semibold text-amber-700">退稅資格：</h3>
                     <p class="text-stone-700 mb-4">在標有「VAT REFUND FOR TOURISTS」標誌的商店購物，當日同一店家消費滿 2,000 泰銖。</p>
                     
@@ -1148,16 +1135,14 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </details>
         </div>
     </div>
 
-    <!-- Back to top button -->
     <button id="backToTopBtn" class="back-to-top">
         <i class="fas fa-arrow-up text-xl"></i>
     </button>
 
-    <!-- Bottom Navigation -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-stone-200 flex justify-around safari-padding">
         <button class="nav-item flex-1 text-center py-3 transition-colors duration-300 active" data-target="home">
             <i class="fa-solid fa-house-chimney text-xl"></i>
@@ -1178,40 +1163,10 @@
     </nav>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, onSnapshot, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-
-        // Firebase Initialization
-        setLogLevel('debug');
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        // Global variables for user and app ID
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        let userId = 'anonymous';
-        let isAuthReady = false;
-
-        // Initial Authentication
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-            } else {
-                try {
-                    const anonymousUser = await signInAnonymously(auth);
-                    userId = anonymousUser.user.uid;
-                } catch (error) {
-                    console.error("Error signing in anonymously: ", error);
-                }
-            }
-            isAuthReady = true;
-            console.log("Auth state changed, user ID:", userId);
-            fetchChecklistItems();
-        });
-
+        // 這段程式碼已經過修改，移除 Firebase 相關的初始化，以確保網頁在 GitHub Pages 上正常運作。
+        // 原本的程式碼會嘗試從特殊的環境變數 (__firebase_config) 讀取設定，但在 GitHub Pages 不存在。
+        // 現在清單會直接從程式碼的陣列中載入，不再進行資料的儲存或讀取。
+        
         // Data for the checklist
         const checklistItems = [
             { id: "passport", text: "護照與簽證 (若需要)", category: "personal-docs" },
@@ -1250,6 +1205,8 @@
         // Function to render the checklist dynamically from data
         function renderChecklist(checkedItems) {
             const listContainer = document.getElementById('must-bring-items-list');
+            if (!listContainer) return;
+
             listContainer.innerHTML = ''; // Clear loading message
 
             const categories = {
@@ -1283,43 +1240,24 @@
                 listContainer.appendChild(ul);
             }
         }
-
-        // Function to update Firestore
-        async function updateChecklistItem(itemId, isChecked) {
-            if (!isAuthReady) {
-                console.log("Firebase not ready. Cannot update.");
-                return;
-            }
-            try {
-                const checklistDocRef = doc(db, `artifacts/${appId}/users/${userId}/checklists/trip-items`);
-                await setDoc(checklistDocRef, { [itemId]: isChecked }, { merge: true });
-                console.log("Document successfully updated!");
-            } catch (error) {
-                console.error("Error updating document: ", error);
+        
+        // 此處將移除資料儲存功能，因為沒有 Firebase 連線
+        function updateChecklistItem(itemId, isChecked) {
+            // 這個函數現在只會更新頁面上的樣式，而不會將資料存到任何地方。
+            // 您可以自行添加其他儲存方式，例如使用瀏覽器的 localStorage。
+            const itemElement = document.querySelector(`.item-checkbox[data-item-id="${itemId}"]`);
+            if (itemElement) {
+                const itemText = itemElement.nextElementSibling;
+                if (isChecked) {
+                    itemText.classList.add('checked');
+                } else {
+                    itemText.classList.remove('checked');
+                }
             }
         }
         
-        // Function to fetch data from Firestore with a real-time listener
-        function fetchChecklistItems() {
-            if (!isAuthReady) {
-                console.log("Firebase not ready. Cannot fetch.");
-                return;
-            }
-            const checklistDocRef = doc(db, `artifacts/${appId}/users/${userId}/checklists/trip-items`);
-            onSnapshot(checklistDocRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    console.log("Current data:", docSnap.data());
-                    renderChecklist(docSnap.data());
-                } else {
-                    console.log("No such document! Initializing checklist.");
-                    renderChecklist({});
-                }
-            }, (error) => {
-                console.error("Error fetching document: ", error);
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
+            // Page navigation function
             const navItems = document.querySelectorAll('.nav-item');
             const pageContents = document.querySelectorAll('.page-content');
             const navRedirects = document.querySelectorAll('.nav-redirect');
@@ -1352,6 +1290,7 @@
                 btn.addEventListener('click', () => switchTab(btn.dataset.target));
             });
             
+            // Day tab switching function
             const dayTabs = document.querySelectorAll('.day-tab');
             const dayContents = document.querySelectorAll('.day-content');
             
@@ -1374,6 +1313,7 @@
                 tab.addEventListener('click', () => showDay(tab.dataset.day));
             });
             
+            // Back to top button logic
             const backToTopBtn = document.getElementById('backToTopBtn');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 200) {
@@ -1390,33 +1330,21 @@
                 });
             });
 
-            const collapsibleHeaders = document.querySelectorAll('.collapsible-card-header');
-            collapsibleHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const parentCard = header.closest('.collapsible-card');
-                    parentCard.classList.toggle('open');
-                });
-            });
-
+            // Initialization
             switchTab('home');
             showDay('1');
             
+            // Checkbox functionality for "旅程必備物品清單"
             const mustBringList = document.getElementById('must-bring-items-list');
             if (mustBringList) {
+                // 這裡我們直接呼叫 renderChecklist，並傳入一個空的物件
+                renderChecklist({});
+                
                 mustBringList.addEventListener('change', function(event) {
                     if (event.target.classList.contains('item-checkbox')) {
                         const itemId = event.target.dataset.itemId;
                         const isChecked = event.target.checked;
                         updateChecklistItem(itemId, isChecked);
-
-                        const itemText = event.target.nextElementSibling;
-                        if (itemText) {
-                            if (event.target.checked) {
-                                itemText.classList.add('checked');
-                            } else {
-                                itemText.classList.remove('checked');
-                            }
-                        }
                     }
                 });
             }
