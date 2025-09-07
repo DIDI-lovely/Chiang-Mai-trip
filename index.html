@@ -350,11 +350,14 @@
 <body class="text-stone-800 safari-padding">
 
     <div id="main-content" class="pb-24">
+        <!-- Home Page -->
         <section id="home" class="page-content">
             <div class="header flex flex-col items-center justify-center">
                 <div class="flex items-center justify-center">
-                    <span class="text-3xl mr-2 opacity-70">🐘</span> <h1 class="font-bold drop-shadow-sm handwritten sm:text-3xl md:text-5xl">CHIANG MAI</h1>
-                    <span class="text-2xl ml-2 opacity-60">🌸</span> </div>
+                    <span class="text-3xl mr-2 opacity-70">🐘</span>
+                    <h1 class="font-bold drop-shadow-sm handwritten sm:text-3xl md:text-5xl">CHIANG MAI</h1>
+                    <span class="text-2xl ml-2 opacity-60">🌸</span>
+                </div>
                 <p class="mt-2 text-lg">2025/09/20 - 2025/09/24</p>
             </div>
 
@@ -442,6 +445,7 @@
                     </button>
                 </div>
 
+                <!-- 新增預算概估卡片 -->
                 <div class="card mt-4">
                     <div class="card-header">
                         <i class="fas fa-wallet"></i><span class="main-title">預算概估 (每人)</span>
@@ -495,6 +499,7 @@
                     </div>
                 </div>
 
+                <!-- 新增貼心小提醒卡片 -->
                 <div class="card mt-4">
                     <div class="card-header">
                         <i class="fas fa-lightbulb"></i><span class="main-title">貼心小提醒</span>
@@ -1147,10 +1152,12 @@
         </div>
     </div>
 
+    <!-- Back to top button -->
     <button id="backToTopBtn" class="back-to-top">
         <i class="fas fa-arrow-up text-xl"></i>
     </button>
 
+    <!-- Bottom Navigation -->
     <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-stone-200 flex justify-around safari-padding">
         <button class="nav-item flex-1 text-center py-3 transition-colors duration-300 active" data-target="home">
             <i class="fa-solid fa-house-chimney text-xl"></i>
@@ -1189,25 +1196,19 @@
         let isAuthReady = false;
 
         // Initial Authentication
-        // Listen for authentication state changes. This is the entry point for all Firebase operations.
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // If a user is already authenticated (e.g., via the token), use their UID.
                 userId = user.uid;
             } else {
-                // If no user is authenticated, sign in anonymously.
                 try {
                     const anonymousUser = await signInAnonymously(auth);
                     userId = anonymousUser.user.uid;
                 } catch (error) {
-                    // Log the error but don't stop the app.
                     console.error("Error signing in anonymously: ", error);
                 }
             }
-            // Set the flag to indicate that authentication is ready.
             isAuthReady = true;
             console.log("Auth state changed, user ID:", userId);
-            // Once authenticated, fetch the checklist data.
             fetchChecklistItems();
         });
 
@@ -1290,9 +1291,7 @@
                 return;
             }
             try {
-                // Use the user's ID to create a unique document path for their private data.
                 const checklistDocRef = doc(db, `artifacts/${appId}/users/${userId}/checklists/trip-items`);
-                // Use setDoc with { merge: true } to update only the changed item without overwriting other data.
                 await setDoc(checklistDocRef, { [itemId]: isChecked }, { merge: true });
                 console.log("Document successfully updated!");
             } catch (error) {
@@ -1307,24 +1306,20 @@
                 return;
             }
             const checklistDocRef = doc(db, `artifacts/${appId}/users/${userId}/checklists/trip-items`);
-            // onSnapshot creates a real-time listener.
-            // Whenever the data in the document changes, this callback function is triggered.
             onSnapshot(checklistDocRef, (docSnap) => {
                 if (docSnap.exists()) {
                     console.log("Current data:", docSnap.data());
                     renderChecklist(docSnap.data());
                 } else {
                     console.log("No such document! Initializing checklist.");
-                    renderChecklist({}); // Render with an empty object if no data exists.
+                    renderChecklist({});
                 }
             }, (error) => {
-                // Handle any errors during the fetch.
                 console.error("Error fetching document: ", error);
             });
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Page navigation function
             const navItems = document.querySelectorAll('.nav-item');
             const pageContents = document.querySelectorAll('.page-content');
             const navRedirects = document.querySelectorAll('.nav-redirect');
@@ -1357,7 +1352,6 @@
                 btn.addEventListener('click', () => switchTab(btn.dataset.target));
             });
             
-            // Day tab switching function
             const dayTabs = document.querySelectorAll('.day-tab');
             const dayContents = document.querySelectorAll('.day-content');
             
@@ -1380,7 +1374,6 @@
                 tab.addEventListener('click', () => showDay(tab.dataset.day));
             });
             
-            // Back to top button logic
             const backToTopBtn = document.getElementById('backToTopBtn');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 200) {
@@ -1397,7 +1390,6 @@
                 });
             });
 
-            // Collapsible card logic
             const collapsibleHeaders = document.querySelectorAll('.collapsible-card-header');
             collapsibleHeaders.forEach(header => {
                 header.addEventListener('click', () => {
@@ -1406,11 +1398,9 @@
                 });
             });
 
-            // Initialization
             switchTab('home');
             showDay('1');
             
-            // Checkbox functionality for "旅程必備物品清單"
             const mustBringList = document.getElementById('must-bring-items-list');
             if (mustBringList) {
                 mustBringList.addEventListener('change', function(event) {
